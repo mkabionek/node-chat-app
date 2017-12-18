@@ -3,19 +3,50 @@
     <head>
         <meta charset="utf-8">
         <script src="/js/libs/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/style.css">
+        <title>Join chat</title>
     </head>
 
     <body>
-        <h1>Welcome to chat app</h1>
+        <div class="container" id="chat_choose">
+            <div class="centered">
+                <form action="">
+                    <div class="group">
+                        <label for="name">Nick</label>
+                        <input type="text" name="name" id="" placeholder="Nick" autocomplete="off">
+                    </div>
+                    <div class="group">
+                        <label for="room">Room</label>
+                        <input type="text" name="room" id="" placeholder="Room" autocomplete="off">
+                    </div>
+                    <div class="group">
+                        chat list...
+                    </div>
+                    <div class="group">
+                        <button id="join">Join</button>
+                    </div>            
+                </form>
+            </div>
+        </div>
 
-        <ol id="messages"></ol>
+        <div class="container" id="chat">   
+            <!-- <div class="sidebar">
+                sdf
+            </div>
 
-        <form id="message-form">
-            <input type="text" name="message" placeholder="message">
-            <button>Send</button>
-        </form>
+            <div class="messages">
+                    sad
+            </div> -->
+            
+                <ol id="messages"></ol>
+        
+                <form id="message-form">
+                    <input type="text" name="message" placeholder="message" autocomplete="off" autofocus>
+                    <button id="send">Send</button>
+                </form>
+        </div>
 
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/index.js"></script>
-    </body>
+    <body>
 </html>
