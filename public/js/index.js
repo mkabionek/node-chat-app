@@ -13,10 +13,8 @@ joinButton.on('click', function(e){
     room = $('[name=room]').val();
     
     if(nick.length != 0 && room.length != 0){
-        
-        socket.emit('join', room, function(err){
+        socket.emit('join', {user: nick, room: room}, function(err){
             if(err){
-
             }else{
                 $('#chat').fadeIn(100);
                 $('#chat_choose').fadeOut(100);
@@ -29,13 +27,15 @@ joinButton.on('click', function(e){
 
 sendButton.on('click', function(e){
     e.preventDefault();
+    var messageInput = $('[name=message]');
     
     socket.emit('createMessage', {
         room: room,
         from: nick,
-        text: $('[name=message]').val()
+        text: messageInput.val()
     }, function(){
         console.log('Message sent');
+        messageInput.val('');
      });
 
 });
@@ -47,10 +47,20 @@ socket.on('connect', function() {
 
 
 socket.on('newMessage', function (message) {
-    console.log('newMessage', message);
-    var li = $('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
-    $('#messages').append(li)
+
+    var msg = $('<div class="message"></div>');
+    var h = $('<div class="head"></div>');
+    var from = $('<span class="from"></span>');
+    from.text(message.from);
+    
+    var time = $('<span class="time"></span>');
+    time.text('12:00');
+    h.append(from,time);
+    var body = $('<p class="body"></p>');
+    body.text(message.text);
+    msg.append(h);
+    msg.append(body);
+    $('.messages').append(msg);
 });
 
 
